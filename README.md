@@ -52,6 +52,24 @@ Supports all/most Cloud KMS out-of-box:
 - Google Cloud KMS
 - many more
 
+
+GCP KMS usage example
+```
+# Install jsign in some way
+#wget https://github.com/ebourg/jsign/releases/download/6.0/jsign-6.0.jar
+brew install jsign
+
+# Get auth token
+gcloud auth print-access-token
+
+# or `java -jar jsign-6.0.jar ...`
+jsign --storetype GOOGLECLOUD \
+       --keystore projects/alex-sc-test/locations/us/keyRings/code-signing-keyring \
+       --storepass ya29... \
+       --alias code_signing_key_2024 \
+       --certfile gcp-test-certificate.crt putty.exe
+```
+
 ### signtool
 
 #### Google KMS
