@@ -1,5 +1,7 @@
 # cloud-kms-code-signing
 
+[Step by step guide for setting up GCP + Digicert + SignTool](DIGICERT_GCP_KMS.md)
+
 ## Cloud Key Storage Selection
 
 This is tightly coupled with a CA selection
@@ -53,6 +55,8 @@ Supports all/most Cloud KMS out-of-box:
 ### signtool
 
 #### Google KMS
+
+
 
 ## Additional links
 - How to Configure EV Code Signing Certificate on Google Cloud HSM? - https://signmycode.com/resources/how-to-set-up-ev-code-signing-on-google-cloud-hsm
