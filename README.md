@@ -42,6 +42,12 @@ While most CAs support tokens and (some) hardware HSMs, many won't issue a certi
 
 ## Integration
 
+| KMS         | signtool | jsign | Azure SignTool |
+|-------------|----------|-------|----------------|
+| AWS KSM     | -        | +     | -              |
+| Azure Vault | -        | +     | +              |
+| Google KMS  | +        | +     | -              |
+
 ### jsign
 
 https://ebourg.github.io/jsign/  
