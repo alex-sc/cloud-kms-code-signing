@@ -1,5 +1,4 @@
 # GCP KMS + DigiCert + SignTool
-[Step by step guide for setting up GCP + Digicert + SignTool](DIGICERT_GCP_KMS.md)
 
 ## Google KMS
 ### Create Private Key
