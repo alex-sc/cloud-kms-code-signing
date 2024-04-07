@@ -40,6 +40,14 @@ https://docs.digicert.com/en/digicert-keylocker/sign-with-digicert-signing-tools
 
 While most CAs support tokens and (some) hardware HSMs, many won't issue a certificate for a private key stored in a Cloud KMS.
 
+
+| CA       | AWS KMS | Azure Vault | GCP KMS | Own solution        | Link                                                                                                               |
+|----------|---------|-------------|---------|---------------------|--------------------------------------------------------------------------------------------------------------------|
+| DigiCert | +?      | +           | +       | DigiCert KeyClocker |                                                                                                                    | 
+| EnTrust  | +       | +           | ?       |                     | https://www.entrust.com/knowledgebase/ssl/code-signing-private-key-protection-requirements-for-cloud-hsm-providers |
+| Comodo   | -?      | -?          | -       |                     |                                                                                                                    |
+
+
 ## Integration
 
 | KMS         | signtool | jsign | Azure SignTool |
