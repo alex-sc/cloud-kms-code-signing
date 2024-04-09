@@ -84,10 +84,19 @@ jsign --storetype GOOGLECLOUD \
        --certfile gcp-test-certificate.crt putty.exe
 ```
 
+Azure Vault
+```
+# Get auth token
+az account get-access-token --resource "https://vault.azure.net"
+
+# or `java -jar jsign-6.0.jar ...`
+jsign --storetype AZUREKEYVAULT \
+       --keystore code-signing-alex \
+       --storepass ey...sQ \
+       --alias azure-code-signing-2024 putty.exe
+```
+
 ### signtool
-
-#### Google KMS
-
 
 
 ## Additional links
