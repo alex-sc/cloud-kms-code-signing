@@ -41,11 +41,11 @@ https://docs.digicert.com/en/digicert-keylocker/sign-with-digicert-signing-tools
 While most CAs support tokens and (some) hardware HSMs, many won't issue a certificate for a private key stored in a Cloud KMS.
 
 
-| CA       | AWS KMS | Azure Vault | GCP KMS | Own solution        | Link                                                                                                               |
-|----------|---------|-------------|---------|---------------------|--------------------------------------------------------------------------------------------------------------------|
-| DigiCert | +?      | +           | +       | DigiCert KeyClocker |                                                                                                                    | 
-| EnTrust  | +       | +           | ?       |                     | https://www.entrust.com/knowledgebase/ssl/code-signing-private-key-protection-requirements-for-cloud-hsm-providers |
-| Comodo   | -?      | -?          | -       |                     |                                                                                                                    |
+| CA       | AWS KMS     | Azure Vault | GCP KMS     | Own solution        | Link                                                                                                               |
+|----------|-------------|-------------|-------------|---------------------|--------------------------------------------------------------------------------------------------------------------|
+| DigiCert | + (2024-07) | +           | + (2024-04) | DigiCert KeyClocker |                                                                                                                    | 
+| EnTrust  | +           | +           | ?           |                     | https://www.entrust.com/knowledgebase/ssl/code-signing-private-key-protection-requirements-for-cloud-hsm-providers |
+| Comodo   | -?          | -?          | -           |                     |                                                                                                                    |
 
 
 ## Integration
@@ -100,8 +100,4 @@ jsign --storetype AZUREKEYVAULT \
 
 
 ## Additional links
-- How to Configure EV Code Signing Certificate on Google Cloud HSM? - https://signmycode.com/resources/how-to-set-up-ev-code-signing-on-google-cloud-hsm
-
-
-
-
+- How to Configure EV Code Signing Certificate on Google Cloud HSM - https://signmycode.com/resources/how-to-set-up-ev-code-signing-on-google-cloud-hsm
