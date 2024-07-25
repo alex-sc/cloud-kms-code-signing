@@ -43,7 +43,7 @@ You may issue a self-signed certificate direcly in Azure UI or use a tool of you
 
 ## Use with AzureSignTool
 
-You may use AzureSignTool or jsign, but not Windows signtool
+You may use AzureSignTool or jsign (see [README.md](README.md#jsign)), but not Windows signtool
 
 https://stackoverflow.com/questions/57475144/how-to-sign-code-built-using-azure-pipelines-using-a-certificate-key-in-azure-ke
 
