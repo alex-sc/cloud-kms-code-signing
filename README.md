@@ -29,7 +29,7 @@ This is what most people need
 
 - Easy to integrate with SignTool
 - Additional cost (~250$/year)
-- Even costs on high volume (1000 signatures includes, more signatures at extra cost ???$)
+- Even more costs on high volume (1000 signatures included, more signatures at extra cost ???$)
 
 ### (USB) Tokens
 Out of scope. Use if it works for you
@@ -50,11 +50,13 @@ While most CAs support tokens and (some) hardware HSMs, many won't issue a certi
 
 ## Integration
 
-| KMS         | signtool | jsign | Azure SignTool |
-|-------------|----------|-------|----------------|
-| AWS KSM     | -        | +     | -              |
-| Azure Vault | -        | +     | +              |
-| Google KMS  | +        | +     | -              |
+| KMS         | signtool | jsign | Azure SignTool | osslsigncode |
+|-------------|----------|-------|----------------|--------------|
+| AWS KSM     | -        | +     | -              | *1           |
+| Azure Vault | -        | +     | +              |              | 
+| Google KMS  | +        | +     | -              |              |
+
+1) AWS + osslsigncode integration should be possible with https://github.com/JackOfMostTrades/aws-kms-pkcs11
 
 ### jsign
 
