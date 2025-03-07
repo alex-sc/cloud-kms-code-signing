@@ -91,3 +91,20 @@ Add similar block to your release pipeline (https://github.com/marketplace/actio
           timestamp-rfc3161: http://timestamp.acs.microsoft.com
           timestamp-digest: SHA256
 ```
+
+## Dotnet/Sign
+https://github.com/dotnet/sign
+### Install
+```shell
+dotnet tool install --tool-path . --prerelease sign
+```
+### Login to Azure CLI
+I'm going to use the same credentials used for GitHub Actions, but you're free to adjust
+```shell
+az login --service-principal -t <Tenant-ID> -u <Client-ID> -p <Client-secret>
+az login --service-principal -t 66a2946b-73c2-4a03-acb5-2c3546ed96c5 -u c8eb3c1b-4144-40ff-a78a-d876e7a67845 -p 4Jq8Q...
+```
+### Sign
+```shell
+sign code trusted-signing "app.exe" -tse https://eus.codesigning.azure.net/ -tsa <trusted-signing-account-name> -tscp <certificate-profile-name>
+```
