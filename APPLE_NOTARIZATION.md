@@ -13,13 +13,17 @@ Notarization might take a significant amount of time occasionally/for new accoun
 You might want to set time limit for the `xcrun notarytool submit` command:
 - `brew install coreutils`
 - `timeout 300s xcrun notarytool submit "notarization.zip" --keychain-profile "notarytool-profile" --wait`
-- Make sure to zip and save your .app as runner artifact prior to submission 
-Now if the notarization times out, you have two options:
+- Make sure to zip and save your .app as runner artifact prior to submission
+- Now if the notarization times out, you have two options:
 - 1. Produce DMG and submit it for notarization. Both APP and DMG won't be stapled (but notarized eventually), so users w/o internet won't be able to verify the notarization offline
 - 2. Take the APP submitted for notarization, async wait for the notarization request to complete
     - Staple the APP manually (doesn't require Developer Account access), see commands below
     - Produce DMG and submit for notarization
     - Staple the DMG manually (doesn't require Developer Account access)
+### Step by step:
+- Download the .zip and extract it
+- Make sure notarization has completed `spctl --assess --type execute --verbose MyApp.app`: `MyApp.app: accepted`
+
 
 ## Useful commands
 ### Signature
@@ -32,7 +36,42 @@ MyApp.app: valid on disk
 MyApp.app: satisfies its Designated Requirement
 ```
 ### Notarization
-Check
+Show history/status
+```shell
+xcrun notarytool history ...
+Successfully received submission history.
+  history
+    --------------------------------------------------
+    createdDate: 2025-04-22T05:50:39.230Z
+    id: a5fc0fe2-1d76-47a5-a1f8-123456789012
+    name: notarization.zip
+    status: In Progress
+    --------------------------------------------------
+    createdDate: 2025-04-21T19:22:34.560Z
+    id: c25e9ae5-72c9-4cc4-845d-123456789012
+    name: notarization.zip
+    status: Accepted
+    --------------------------------------------------
+    createdDate: 2025-04-21T13:01:34.642Z
+    id: a26f4dd9-1a6f-488f-9af5-123456789012
+    name: notarization.zip
+    status: Invalid
+```
+Show individual submission status
+```shell
+xcrun notarytool log a26f4dd9-1a6f-488f-9af5-123456789012
+
+{
+  "logFormatVersion": 1,
+  "jobId": "a26f4dd9-1a6f-488f-9af5-123456789012",
+  "status": "Invalid",
+  "statusSummary": "Archive contains critical validation errors",
+  "statusCode": 4000,
+  "archiveFilename": "notarization.zip",
+...
+}
+```
+Check the app
 ```shell
 spctl --assess --type execute --verbose MyApp.app
 ```
