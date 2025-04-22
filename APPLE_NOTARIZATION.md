@@ -1,0 +1,64 @@
+# Apple Code Signing And Notarization
+
+## Summary
+Apple Application code signing and notarization consists of two and a half steps:
+- Code Signing `codesign --deep --force ...`. This is an almost offline process (besides timestamping) requiring your code signing certificate. Completes in seconds
+- Notarization `xcrun notarytool submit ...`. This is an online process when your code is sent to Apple servers and may take seconds to hours
+- (optional) Notarization stapling `xcrun stapler staple`. Attaches notarization output to the binary. Not necessary for online verification, but recommended. Doesn't require access to the dev account used for signing/notarization 
+
+
+## Troubleshooting
+Notarization might take a significant amount of time occasionally/for new accounts/apps.
+
+You might want to set time limit for the `xcrun notarytool submit` command:
+- `brew install coreutils`
+- `timeout 300s xcrun notarytool submit "notarization.zip" --keychain-profile "notarytool-profile" --wait`
+- Make sure to zip and save your .app as runner artifact prior to submission 
+Now if the notarization times out, you have two options:
+- 1. Produce DMG and submit it for notarization. Both APP and DMG won't be stapled (but notarized eventually), so users w/o internet won't be able to verify the notarization offline
+- 2. Take the APP submitted for notarization, async wait for the notarization request to complete
+    - Staple the APP manually (doesn't require Developer Account access), see commands below
+    - Produce DMG and submit for notarization
+    - Staple the DMG manually (doesn't require Developer Account access)
+
+## Useful commands
+### Signature
+```shell
+codesign --verify --deep --strict --verbose=2 MyApp.app
+```
+Signed app output
+```shell
+MyApp.app: valid on disk
+MyApp.app: satisfies its Designated Requirement
+```
+### Notarization
+Check
+```shell
+spctl --assess --type execute --verbose MyApp.app
+```
+Output for stapled app
+```shell
+MyApp.app: accepted
+source=Notarized Developer ID
+```
+### Stapling
+Check
+```shell
+xcrun stapler validate MyApp.app
+```
+Stapled app output
+```shell
+The validate action worked!
+```
+Non-stapled app output
+```shell
+MyApp.app does not have a ticket stapled to it.
+```
+Staple already notarized app
+```shell
+xcrun stapler staple MyApp.app
+```
+Output
+```shell
+The staple and validate action worked!
+```
