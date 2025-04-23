@@ -23,6 +23,15 @@ You might want to set time limit for the `xcrun notarytool submit` command:
 ### Step by step:
 - Download the .zip and extract it
 - Make sure notarization has completed `spctl --assess --type execute --verbose MyApp.app`: `MyApp.app: accepted`
+- Staple the .app `xcrun stapler staple MyApp.app`
+- Verify stapling `xcrun stapler validate MyApp.app`
+- Optionally create a DMG (same as in GitHub Action):
+```shell
+mkdir -p dmg
+cp -R MyApp.app dmg/
+hdiutil create -volname "MyApp" -srcfolder dmg -ov -format UDZO MyApp.dmg
+```
+- Optionally, notarize and staple DMG (refer to GitHub action for exact commands)
 
 
 ## Useful commands
