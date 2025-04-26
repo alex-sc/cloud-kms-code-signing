@@ -6,8 +6,8 @@ Apple Application code signing and notarization consists of two and a half steps
 - Notarization `xcrun notarytool submit ...`. This is an online process when your code is sent to Apple servers and may take seconds to hours
 - (optional) Notarization stapling `xcrun stapler staple`. Attaches notarization output to the binary. Not necessary for online verification, but recommended. Doesn't require access to the dev account used for signing/notarization 
 
-
 ## Troubleshooting
+### Notatization Timeout
 Notarization might take a significant amount of time occasionally/for new accounts/apps.
 
 You might want to set time limit for the `xcrun notarytool submit` command:
@@ -20,7 +20,7 @@ You might want to set time limit for the `xcrun notarytool submit` command:
     - Staple the APP manually (doesn't require Developer Account access), see commands below
     - Produce DMG and submit for notarization
     - Staple the DMG manually (doesn't require Developer Account access)
-### Step by step:
+#### Step by step:
 - Download the .zip and extract it
 - Make sure notarization has completed `spctl --assess --type execute --verbose MyApp.app`: `MyApp.app: accepted`
 - Staple the .app `xcrun stapler staple MyApp.app`
@@ -33,6 +33,28 @@ hdiutil create -volname "MyApp" -srcfolder dmg -ov -format UDZO MyApp.dmg
 ```
 - Optionally, notarize and staple DMG (refer to GitHub action for exact commands)
 
+### Enable entitlements in macOS
+Include at signing time
+```shell
+codesign ... --entitlements MyApp/MyApp.entitlements ...
+```
+Verify
+```shell
+codesign -d --entitlements - MyApp.app
+```
+```shell
+Executable=/Users/alex/Downloads/MyApp.app/Contents/MacOS/MyApp
+[Dict]
+	[Key] com.apple.security.app-sandbox
+	[Value]
+		[Bool] true
+	[Key] com.apple.security.device.audio-input
+	[Value]
+		[Bool] true
+	[Key] com.apple.security.network.client
+	[Value]
+		[Bool] true
+```
 
 ## Useful commands
 ### Signature
